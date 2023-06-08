@@ -16,7 +16,7 @@ provider "azurerm" {
    features {}
 }
 
-resource "azurerm_resource_group" "jktfrg" {
+resource "azurerm_resource_group" "test" {
   name     = "vincentTP2"
   location = "West Europe"
 }
