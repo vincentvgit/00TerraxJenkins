@@ -2,13 +2,13 @@ pipeline{
     agent any
     //Specify what tool you want to use
     tools {
-        terraform 'Terraform'
+        terraform 'terra'
     }
      stages{
          //Check the version and download any changes 
         stage('Git Checkout'){
             steps{
-               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Nevralgie/TerraxJenkins']])
+               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/vincentvgit/tom-TerraxJenkins']])
             }
         }
         //Initiate the directory as the current workspace
