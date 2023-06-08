@@ -6,7 +6,7 @@ pipeline{
      stages{
         stage('Git Checkout'){
             steps{
-                git "https://github.com/Nevralgie/TerraxJenkins.git"
+               checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Nevralgie/TerraxJenkins']])
             }
         }
         
@@ -16,7 +16,7 @@ pipeline{
             }
         }
         
-        stage('Terraform plan'){
+        stage('Terraform paln'){
             steps{
                 sh 'terraform plan'
             }
@@ -27,5 +27,4 @@ pipeline{
             }
     }
 }
-
 }
