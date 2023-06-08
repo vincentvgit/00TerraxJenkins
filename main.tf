@@ -9,16 +9,16 @@ terraform {
 
 provider "azurerm" {
    subscription_id = "393e3de3-0900-4b72-8f1b-fb3b1d6b97f1"
-   client_id = "1244ff47-5233-442c-b8df-b761e220bc23"
-   client_secret = "YtY8Q~Q6kLoKDGGGEn3lGlILr--HZ5EsbJwOGba-"
+   #client_id = "1244ff47-5233-442c-b8df-b761e220bc23"
+   #client_secret = "YtY8Q~Q6kLoKDGGGEn3lGlILr--HZ5EsbJwOGba-"
    tenant_id = "7349d3b2-951f-41be-877e-d8ccd9f3e73c"
    skip_provider_registration = true
    features {}
 }
 
 resource "azurerm_resource_group" "jktfrg" {
-  name     = "example-resources"
-  location = "francecentral"
+  name     = "TerraxJenkTom1"
+  location = "West Europe"
 }
 
 resource "azurerm_virtual_network" "jktfvm" {
@@ -48,11 +48,13 @@ resource "azurerm_network_interface" "jktfnic" {
 }
 
 resource "azurerm_linux_virtual_machine" "jktfvm" {
-  name                = "example-machine"
+  name                = "Vmjktf"
   resource_group_name = azurerm_resource_group.jktfrg.name
   location            = azurerm_resource_group.jktfrg.location
-  size                = "Standard_F2"
+  size                = "Standard_DS1_v2"
   admin_username      = "adminuser"
+  admin_password      = "@Azurev69007"
+  disable_password_authentication = "false"
   network_interface_ids = [
     azurerm_network_interface.jktfnic.id,
   ]
@@ -64,8 +66,8 @@ resource "azurerm_linux_virtual_machine" "jktfvm" {
 
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "20.04-LTS"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
 }
