@@ -16,47 +16,47 @@ provider "azurerm" {
    features {}
 }
 
-resource "azurerm_resource_group" "jktfrg" {
-  name     = "TerraxJenkTom"
+resource "azurerm_resource_group" "jkthfrg" {
+  name     = "vincentTP"
   location = "West Europe"
 }
 
 resource "azurerm_virtual_network" "jktfvm" {
   name                = "jknetwork"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.jktfrg.location
-  resource_group_name = azurerm_resource_group.jktfrg.name
+  location            = azurerm_resource_group.jkthfrg.location
+  resource_group_name = azurerm_resource_group.jkthfrg.name
 }
 
-resource "azurerm_subnet" "jktfsub" {
+resource "azurerm_subnet" "jkthfsub" {
   name                 = "internal"
-  resource_group_name  = azurerm_resource_group.jktfrg.name
-  virtual_network_name = azurerm_virtual_network.jktfvm.name
+  resource_group_name  = azurerm_resource_group.jkthfrg.name
+  virtual_network_name = azurerm_virtual_network.jkthfvm.name
   address_prefixes     = ["10.0.2.0/24"]
 }
 
-resource "azurerm_network_interface" "jktfnic" {
+resource "azurerm_network_interface" "jkthfnic" {
   name                = "example-nic"
-  location            = azurerm_resource_group.jktfrg.location
-  resource_group_name = azurerm_resource_group.jktfrg.name
+  location            = azurerm_resource_group.jkthfrg.location
+  resource_group_name = azurerm_resource_group.jkthfrg.name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.jktfsub.id
+    subnet_id                     = azurerm_subnet.jktfhsub.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
-resource "azurerm_linux_virtual_machine" "jktfvm" {
+resource "azurerm_linux_virtual_machine" "jkthfvm" {
   name                = "Vmjktf"
-  resource_group_name = azurerm_resource_group.jktfrg.name
-  location            = azurerm_resource_group.jktfrg.location
+  resource_group_name = azurerm_resource_group.jkthfrg.name
+  location            = azurerm_resource_group.jkthfrg.location
   size                = "Standard_DS1_v2"
   admin_username      = "adminuser"
   admin_password      = "@Azurev69007"
   disable_password_authentication = "false"
   network_interface_ids = [
-    azurerm_network_interface.jktfnic.id,
+    azurerm_network_interface.jkthfnic.id,
   ]
 
   os_disk {
